@@ -1,0 +1,120 @@
+{{ define "index" }}
+
+{{template "header"}}
+<body>
+    <div class="accordion accordion-flush mx-5 shadow" id="accordionFlush">
+        {{range .Sites}}
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="heading">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#coll-{{.ID}}" aria-expanded="false" aria-controls="coll-{{.ID}}">
+                {{.Title}} 
+                </button>
+            </h2>
+        </div>
+        <div id="coll-{{.ID}}" class="accordion-collapse collapse" aria-labelledby="heading" data-bs-parent="#accordionFlush">
+            <div class="accordion accordion-flush mx-4" id="accordionFlushSDS">
+                {{range $title, $clusters := .Clusters}}
+                  
+                    <div class="accordion-item bg-light">
+                      <h2 class="accordion-header" id="headingSDS">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSDS-{{$title}}" aria-expanded="false" aria-controls="collapseSDS-{{$title}}">
+                          {{$title}}
+                        </button>
+                      </h2>
+                      <div id="collapseSDS-{{$title}}" class="accordion-collapse collapse" aria-labelledby="headingSDS" data-bs-parent="#accordionFlushSDS">
+                        {{if eq $title "oceanstores"}}
+                        <!-- PASS TODO OCEANSTORE -->
+                        <table class="table">
+                          <thead class="thead-dark">
+                            <tr>
+                              <th scope="col">Наименование</th>
+                              <th scope="col">Всего</th>
+                              <th scope="col">Используется</th>
+                              <th scope="col">Свободно</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {{range $name, $osdata := $clusters}}
+                            <tr>
+                              <th scope="row">{{$name}}</th>
+                              <td>{{$osdata.total }}</td>
+                              <td>{{$osdata.used }}</td>
+                              <td>{{$osdata.free }}</td>
+                            </tr>
+                            {{end}}
+                          </tbody>
+                        </table>
+                        {{else}}
+                          {{range $being, $data := $clusters}}
+                            {{if eq $being "timestamp"}}
+                            <!-- PASS TODO -->
+                            {{else}}
+                            <div class="accordion-item bg-light">
+                              <h2 class="accordion-header" id="headingBeing">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#coll-being-{{$being}}" aria-expanded="false" aria-controls="coll-being-{{$being}}">
+                                  {{$being}}
+                                </button>
+                              </h2>
+                              <div id="coll-being-{{$being}}" class="accordion-collapse collapse" aria-labelledby="headingBeing" data-bs-parent="#accordionFlushBeing">
+                                {{if eq $being "zones"}}
+                                <table class="table">
+                                  <thead class="thead-dark">
+                                    <tr>
+                                      <th scope="col">Наименование</th>
+                                      <th scope="col">Всего</th>
+                                      <th scope="col">Используется</th>
+                                      <th scope="col">Свободно</th>
+                                      <th scope="col">Выделено</th>
+                                      <th scope="col">Переподписка</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    {{range $name, $zdata := $data}}
+                                    <tr>
+                                      <th scope="row">{{$name}}</th>
+                                      <td>{{$zdata.Total }}</td>
+                                      <td>{{$zdata.Free }}</td>
+                                      <td>{{$zdata.Used }}</td>
+                                      <td>{{$zdata.Avail }}</td>
+                                      <td>{{$zdata.Provis }}</td>
+                                    </tr>
+                                    {{end}}
+                                  </tbody>
+                                </table>
+                                {{else if eq $being "pools"}}
+                                <p>{{$clusters}}</p>
+                                {{else}}
+                                {{end}}
+                              </div>
+                            </div>
+                            {{end}}
+                          {{end}}
+                        {{end}}
+                      </div>
+                    </div>
+                {{ else }}
+                <div class="accordion-item bg-light">
+                  <h2 class="accordion-header" id="headingSDS">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSDS" aria-expanded="false" aria-controls="collapseSDS">
+                      Данные
+                    </button>
+                  </h2>
+                  <div id="collapseSDS" class="accordion-collapse collapse" aria-labelledby="headingSDS" data-bs-parent="#accordionFlushSDS">
+                    <div class="accordion-body">Данные не найдены. Обновите страницу</div>
+                  </div>
+                </div>
+                {{ end }}
+            </div>
+        </div>
+        
+        {{else}}
+        <div class="mx-auto" style="width: 50%;">
+            <h1>Данных не найдено</h1>
+            <h2>Обратитесь к администратору</h2>
+            <br>
+            <a href="/">Обновить</a>
+        </div>
+        {{end}}
+    </div>
+</body>
+{{end}}
