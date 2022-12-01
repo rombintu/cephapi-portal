@@ -1,0 +1,11 @@
+[Unit]
+Description=cephapi portal
+
+[Service]
+WorkingDirectory=/opt/cephapi-portal
+ExecStart=/opt/cephapi-portal/dist/prog
+ExecStop=/bin/kill -15 $MAINPID
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

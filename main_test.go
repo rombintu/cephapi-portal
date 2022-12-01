@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/rombintu/cephapi-portal/server"
+	"github.com/rombintu/cephapi-portal/utils"
 )
 
 func TestCreateServer(t *testing.T) {
@@ -16,4 +17,14 @@ func TestParseData(t *testing.T) {
 	s := server.NewServer("config.toml")
 	sites := s.LoadSitesData()
 	fmt.Println(sites)
+}
+
+func TestMapsToCSV(t *testing.T) {
+	s := server.NewServer("config.toml")
+	sites := s.LoadSitesData()
+	for _, s := range sites {
+		if s.Title == "DC1" {
+			utils.MapsToDoubleList(s.ID, s.Title, s.Clusters)
+		}
+	}
 }

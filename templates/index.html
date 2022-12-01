@@ -63,10 +63,10 @@
                                     <tr>
                                       <th scope="col">Наименование</th>
                                       <th scope="col">Всего</th>
-                                      <th scope="col">Используется</th>
+                                      <th scope="col">Запровижено/Выделено</th>
                                       <th scope="col">Свободно</th>
-                                      <th scope="col">Выделено</th>
-                                      <th scope="col">Переподписка</th>
+                                      <!-- <th scope="col">Выделено</th>
+                                      <th scope="col">Используется</th> -->
                                     </tr>
                                   </thead>
                                   <tbody>
@@ -74,10 +74,9 @@
                                     <tr>
                                       <th scope="row">{{$name}}</th>
                                       <td>{{$zdata.Total }}</td>
-                                      <td>{{$zdata.Free }}</td>
-                                      <td>{{$zdata.Used }}</td>
-                                      <td>{{$zdata.Avail }}</td>
                                       <td>{{$zdata.Provis }}</td>
+                                      <td>{{$zdata.Free }}</td>
+                                      <!-- zdata.Avail || zdata.Used -->
                                     </tr>
                                     {{end}}
                                   </tbody>
