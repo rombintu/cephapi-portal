@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/static/images/favicon.ico">
     <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css" >
     <script src="/static/js/bootstrap.min.js"></script>
     <title>CephapiPortal</title>
@@ -20,7 +21,7 @@
 
         <Button class="btn btn-success" type="button" style="width: 20%">
             Экспорт
-            <img width="25px" src="/static/images/csv2.svg">
+            <img width="25px" src="/static/images/csv.svg">
         </Button>
 
         <script>
@@ -31,8 +32,9 @@
             const rows = prerows.getElementsByClassName('accordion-header')
             Array.from(rows).forEach(function(row) {
                 const data = row.firstElementChild.textContent
-                if (data.toLowerCase().includes(term)) {
+                if (data.trim().toLowerCase().includes(term)) {
                 row.style.display = ''
+                Array.from(row.childNodes).forEach(function(child) {child.style.display = ''})
                 } else {
                 row.style.display = 'none'
                 }

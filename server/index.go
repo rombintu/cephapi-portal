@@ -46,7 +46,6 @@ func (s *Server) Index(res http.ResponseWriter, req *http.Request) {
 	template, err := template.ParseFiles(
 		"templates/index.html",
 		"templates/header.html",
-		// "templates/footer.gohtml",
 	)
 	if err != nil {
 		fmt.Fprintf(res, err.Error(), http.StatusBadRequest)

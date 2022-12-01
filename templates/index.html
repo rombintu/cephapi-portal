@@ -48,6 +48,7 @@
                           {{range $being, $data := $clusters}}
                             {{if eq $being "timestamp"}}
                             <!-- PASS TODO -->
+                            <div class="text-center text-muted">Обновлено: {{$data}}</div>
                             {{else}}
                             <div class="accordion-item bg-light">
                               <h2 class="accordion-header" id="headingBeing">
@@ -82,7 +83,26 @@
                                   </tbody>
                                 </table>
                                 {{else if eq $being "pools"}}
-                                <p>{{$clusters}}</p>
+                                <table class="table">
+                                  <thead class="thead-dark">
+                                    <tr>
+                                      <th scope="col">Наименование</th>
+                                      <th scope="col">Всего</th>
+                                      <th scope="col">Используется</th>
+                                      <th scope="col">Zone ID</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    {{range $name, $zdata := $data}}
+                                    <tr>
+                                      <th scope="row">{{$name}}</th>
+                                      <td>{{$zdata.Provis }}</td>
+                                      <td>{{$zdata.Used }}</td>
+                                      <td>{{$zdata.ZoneID }}</td>
+                                    </tr>
+                                    {{end}}
+                                  </tbody>
+                                </table>
                                 {{else}}
                                 {{end}}
                               </div>
