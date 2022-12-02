@@ -14,6 +14,7 @@ func NewRouter() *mux.Router {
 func (s *Server) ConfigureRouter() {
 	// Routes
 	s.Router.HandleFunc("/", s.Index)
+	s.Router.HandleFunc("/export", s.ExportToCsv)
 
 	// Configure static files
 	s.Router.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))

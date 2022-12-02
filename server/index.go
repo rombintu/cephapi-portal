@@ -10,26 +10,6 @@ import (
 	"time"
 )
 
-// type SDS map[string]interface{}
-
-// 	Zones map[string]string `json:"zones,omitempty"`
-// 	Pools map[string]string `json:"pools,omitempty"`
-// }
-
-// type Oceanstores map[string]interface{}
-
-// type Clusters struct {
-// 	ID          int
-// 	SDS1        SDS         `json:"sds1,omitempty"`
-// 	SDS2        SDS         `json:"sds2,omitempty"`
-// 	SDS3        SDS         `json:"sds3,omitempty"`
-// 	SDS4        SDS         `json:"sds4,omitempty"`
-// 	SDS5        SDS         `json:"sds5,omitempty"`
-// 	SDS6        SDS         `json:"sds6,omitempty"`
-// 	Oceanstores Oceanstores `json:"oceanstores,omitempty"`
-// 	Timestamp   string      `json:"timestamp,omitempty"`
-// }
-
 type Clusters map[string]interface{}
 
 type Site struct {
@@ -93,4 +73,11 @@ func (s *Server) LoadSitesData() []Site {
 		)
 	}
 	return sites
+}
+
+func (s *Server) LoadSiteDataByTitle(title string) Site {
+	return Site{
+		Title:    title,
+		Clusters: ParseDataFromUrl(s.Config.Urls[title]),
+	}
 }
