@@ -1,0 +1,6 @@
+Port = "8082"
+
+[Urls]
+API1 = "http://127.0.0.1:8080/api.json"
+API2 = "http://127.0.0.1:8081/api.json"
+

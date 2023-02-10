@@ -23,7 +23,7 @@ func TestMapsToCSV(t *testing.T) {
 	s := server.NewServer("config.toml")
 	sites := s.LoadSitesData()
 	for _, s := range sites {
-		if s.Title == "DC1" {
+		if s.Title == "API1" {
 			bts := utils.MapsToCSV(s.ID, s.Title, s.Clusters)
 			fmt.Println(bts)
 		}

@@ -4,6 +4,7 @@
 ```bash
 git clone <this-repo>; cd <this-repo>
 make release
+cp config.toml.bak config.toml
 vim config.toml # Настройка
 cp systemd/cephapi.service /etc/systemd/system/
 systemctl daemon-reload
