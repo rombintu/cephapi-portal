@@ -15,3 +15,8 @@ make release
 make prodrun # Запуск
 ```
 
+## Docker
+```bash
+docker build -t cephapi .
+docker run -d -p 80:8082 -v ./config.toml:/opt/cephapi-portal/config.toml --name cephapi cephapi:latest
+```

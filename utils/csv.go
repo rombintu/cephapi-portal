@@ -149,6 +149,9 @@ func StrToFloatStr(str string) string {
 		return "0"
 	}
 	cells := strings.Split(str, " ")
+	if len(cells) < 2 {
+		return "parse-error"
+	}
 	switch cells[1] {
 	case "KB":
 		// return ToFloat(cells[0], math.Pow(10, -9))
